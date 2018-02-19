@@ -12,7 +12,7 @@ simulation_info_url <- 'http://something.com'
 italy_box_y <- c(36, 47.5)
 italy_box_x <- c(6.1, 19.5)  
 
-load('/Users/francesco/public_git/collegi_elettorali_ita_2017/ige18_app/app_data.RData')
+load('app_data.RData')
 
 
 ui <- bootstrapPage(
