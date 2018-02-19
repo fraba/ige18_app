@@ -58,13 +58,13 @@ ui <- bootstrapPage(
                   condition = "output.language == 'en'",
                   tags$div(
                   tags$p(style="display:inline", tags$a(href=paste0(app_url, "?lang=it"), "IT")),
-                  tags$p(style="display:inline; margin-left:20px; font-size: 75%", tags$a(href = simulation_info_url, target = '_blank', "Simulation details"), " - Designed by ", tags$a(href="http://www.francescobailo.net/", target='_blank', "Francesco Bailo"), " - Hosted by ", tags$a(href = 'https://nectar.org.au/research-cloud/', target='_blank', 'Nectar Cloud')),
+                  tags$p(style="display:inline; margin-left:20px; font-size: 75%", tags$a(href = simulation_info_url, target = '_blank', "Simulation details"), " - Designed by ", tags$a(href="http://www.francescobailo.net/", target='_blank', "Francesco Bailo"), " - Hosted by ", tags$a(href = 'https://nectar.org.au/research-cloud/', target='_blank', 'Nectar Cloud'), " - ", tags$a(href = 'https://github.com/fraba/ige18_app', target='_blank', 'Code')),
                   id='footnote')),
                 conditionalPanel(
                   condition = "output.language != 'en'",
                   tags$div(
                     tags$p(style="display:inline", tags$a(href=paste0(app_url, "?lang=en"), "EN")),
-                    tags$p(style="display:inline; margin-left:20px; font-size: 75%", tags$a(href = simulation_info_url, target = '_blank', "Dettagli simulazione"), " - Creato da ", tags$a(href="http://www.francescobailo.net/", target='_blank', "Francesco Bailo"), " - Hosted by ", tags$a(href = 'https://nectar.org.au/research-cloud/', target='_blank', 'Nectar Cloud')),
+                    tags$p(style="display:inline; margin-left:20px; font-size: 75%", tags$a(href = simulation_info_url, target = '_blank', "Dettagli simulazione"), " - Creato da ", tags$a(href="http://www.francescobailo.net/", target='_blank', "Francesco Bailo"), " - Hosted by ", tags$a(href = 'https://nectar.org.au/research-cloud/', target='_blank', 'Nectar Cloud'), " - ", tags$a(href = 'https://github.com/fraba/ige18_app', target='_blank', 'Code')),
                     id='footnote'))
   )
 )
