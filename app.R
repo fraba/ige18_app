@@ -17,7 +17,7 @@ load('app_data.RData')
 
 ui <- fluidPage(
   tags$link(href="https://fonts.googleapis.com/css?family=Open+Sans", rel="stylesheet"),
-  tags$style(type = "text/css", "html, body {width:100%;height:100%;font-family: 'Open Sans', sans-serif;} .leaflet-bottom.leaflet-left {position: absolute; bottom: 50px} th, td {padding: 3px;} label {font-size: small} table {font-size: x-small} h3 {font-size: small; font-weight: 700} .selectize-input {font-size: small} h1 {font-size: 150%; font-weight: 900;} h1 {margin-bottom: 8px; margin-top: 8px} h3 {margin-bottom: 1px; margin-top: 3px} .table, #camera_sim_bar, #senato_sim_bar {margin-top: 3px; margin-bottom: 10px;} label.control-label, .selectize-control.single{ display: table-cell; vertical-align: middle; } .form-group { display: table-row;} .control-label {padding-right: 10px} #map_variable_dens{margin-bottom: 6px} .selectize-control {width: 250px} #footnote {font-size: 90%; padding: 0px; margin: 0px;}"),
+  tags$style(type = "text/css", "html, body {width:100%;height:100%;font-family: 'Open Sans', sans-serif;} .leaflet-bottom.leaflet-left {position: absolute; bottom: 50px} th, td {padding: 3px;} label {font-size: small} table {font-size: x-small} h3 {font-size: small; font-weight: 700} .selectize-input {font-size: small} h1 {font-size: 150%; font-weight: 900;} h1 {margin-bottom: 8px; margin-top: 8px} h3 {margin-bottom: 1px; margin-top: 3px} .table, #camera_sim_bar, #senato_sim_bar {margin-top: 3px; margin-bottom: 10px;} label.control-label, .selectize-control.single{ display: table-cell; vertical-align: middle; } .form-group { display: table-row;} .control-label {padding-right: 10px} #map_variable_dens{margin-bottom: 6px} .selectize-control {width: 250px} #footnote {font-size: 90%; padding: 0px; margin: 0px;} #info {min-width: 200px}"),
   fluidRow(
     column(4,
            conditionalPanel(
@@ -27,10 +27,6 @@ ui <- fluidPage(
              condition = "output.language != 'en'",
              tags$h1("Elezioni 2018: Simulazione risultato collegi e distribuzione seggi")),
            # uiOutput("which_maptype_ui"),
-           uiOutput("map_variable_ui"),
-           plotOutput("map_variable_dens", height = '130px'),
-           uiOutput("which_map_ui"),
-           hr(style = 'margin: 10px;'),
            conditionalPanel(
              condition = "output.language == 'en'",
              tags$h3("Distribution of seats based on simulation results")),
@@ -52,6 +48,15 @@ ui <- fluidPage(
              condition = "output.language != 'en'",
              tags$h3("Senato della Repubblica")),
            plotOutput("senato_sim_bar", height = '100px'),
+           
+           hr(style = 'margin: 10px;'),
+           
+           uiOutput("map_variable_ui"),
+           plotOutput("map_variable_dens", height = '130px'),
+           uiOutput("which_map_ui"),
+           
+           hr(style = 'margin: 10px;'),
+
            conditionalPanel(
              condition = "output.language == 'en'",
              tags$div(
