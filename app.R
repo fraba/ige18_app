@@ -15,58 +15,55 @@ italy_box_x <- c(6.1, 19.5)
 load('app_data.RData')
 
 
-ui <- bootstrapPage(
+ui <- fluidPage(
   tags$link(href="https://fonts.googleapis.com/css?family=Open+Sans", rel="stylesheet"),
-  tags$style(type = "text/css", "html, body {width:100%;height:100%;font-family: 'Open Sans', sans-serif;} .leaflet-bottom.leaflet-left {position: absolute; bottom: 50px} th, td {padding: 3px;} label {font-size: small} table {font-size: x-small} h3 {font-size: small; font-weight: 700} .selectize-input {font-size: small} h1 {font-size: 150%; font-weight: 900;} h1 {margin-bottom: 2px; margin-top: 2px} h3 {margin-bottom: 1px; margin-top: 3px} .table, #camera_sim_bar, #senato_sim_bar {margin-top: 3px; margin-bottom: 10px;} label.control-label, .selectize-control.single{ display: table-cell; vertical-align: middle; } .form-group { display: table-row;} .control-label {padding-right: 10px} #map_variable_dens{margin-bottom: 6px} .selectize-control {width: 250px} #footnote {padding: 0px; margin: 0px}"),
-  leafletOutput("map", width = "100%", height = "100%"),
-  absolutePanel(top = 10, right = 10, width = '400px',
-                conditionalPanel(
-                  condition = "output.language == 'en'",
-                  tags$h1("Election 2018: District result simulation and seat distribution")),
-                conditionalPanel(
-                  condition = "output.language != 'en'",
-                  tags$h1("Elezioni 2018: Simulazione risultato collegi e distribuzione seggi")),
-                # uiOutput("which_maptype_ui"),
-                uiOutput("map_variable_ui"),
-                plotOutput("map_variable_dens", height = '130px'),
-                uiOutput("which_map_ui"),
-                hr(style = 'margin: 10px;'),
-                conditionalPanel(
-                  condition = "output.language == 'en'",
-                  tags$h3("Distribution of seats based on simulation results")),
-                conditionalPanel(
-                  condition = "output.language != 'en'",
-                  tags$h3("Distribuzione di seggi in base ai risultati della simulazione")),
-                tableOutput('coalition_table'),
-                conditionalPanel(
-                  condition = "output.language == 'en'",
-                  tags$h3("Chamber of Deputies")),
-                conditionalPanel(
-                  condition = "output.language != 'en'",
-                  tags$h3("Camera dei Deputati")),
-                plotOutput("camera_sim_bar", height = '100px'),
-                conditionalPanel(
-                  condition = "output.language == 'en'",
-                  tags$h3("Senate of the Republic")),
-                conditionalPanel(
-                  condition = "output.language != 'en'",
-                  tags$h3("Senato della Repubblica")),
-                plotOutput("senato_sim_bar", height = '100px')
-  ),
-  absolutePanel(bottom = 5, left = 5,
-                conditionalPanel(
-                  condition = "output.language == 'en'",
-                  tags$div(
-                  tags$p(style="display:inline", tags$a(href=paste0(app_url, "?lang=it"), "IT")),
-                  tags$p(style="display:inline; margin-left:20px; font-size: 75%", tags$a(href = simulation_info_url, target = '_blank', "Simulation details"), " - Designed by ", tags$a(href="http://www.francescobailo.net/", target='_blank', "Francesco Bailo"), " - Hosted by ", tags$a(href = 'https://nectar.org.au/research-cloud/', target='_blank', 'Nectar Cloud'), " - ", tags$a(href = 'https://github.com/fraba/ige18_app', target='_blank', 'Code')),
-                  id='footnote')),
-                conditionalPanel(
-                  condition = "output.language != 'en'",
-                  tags$div(
-                    tags$p(style="display:inline", tags$a(href=paste0(app_url, "?lang=en"), "EN")),
-                    tags$p(style="display:inline; margin-left:20px; font-size: 75%", tags$a(href = simulation_info_url, target = '_blank', "Dettagli simulazione"), " - Creato da ", tags$a(href="http://www.francescobailo.net/", target='_blank', "Francesco Bailo"), " - Hosted by ", tags$a(href = 'https://nectar.org.au/research-cloud/', target='_blank', 'Nectar Cloud'), " - ", tags$a(href = 'https://github.com/fraba/ige18_app', target='_blank', 'Code')),
-                    id='footnote'))
-  )
+  tags$style(type = "text/css", "html, body {width:100%;height:100%;font-family: 'Open Sans', sans-serif;} .leaflet-bottom.leaflet-left {position: absolute; bottom: 50px} th, td {padding: 3px;} label {font-size: small} table {font-size: x-small} h3 {font-size: small; font-weight: 700} .selectize-input {font-size: small} h1 {font-size: 150%; font-weight: 900;} h1 {margin-bottom: 8px; margin-top: 8px} h3 {margin-bottom: 1px; margin-top: 3px} .table, #camera_sim_bar, #senato_sim_bar {margin-top: 3px; margin-bottom: 10px;} label.control-label, .selectize-control.single{ display: table-cell; vertical-align: middle; } .form-group { display: table-row;} .control-label {padding-right: 10px} #map_variable_dens{margin-bottom: 6px} .selectize-control {width: 250px} #footnote {font-size: 90%; padding: 0px; margin: 0px;}"),
+  fluidRow(
+    column(4,
+           conditionalPanel(
+             condition = "output.language == 'en'",
+             tags$h1("Election 2018: District result simulation and seat distribution")),
+           conditionalPanel(
+             condition = "output.language != 'en'",
+             tags$h1("Elezioni 2018: Simulazione risultato collegi e distribuzione seggi")),
+           # uiOutput("which_maptype_ui"),
+           uiOutput("map_variable_ui"),
+           plotOutput("map_variable_dens", height = '130px'),
+           uiOutput("which_map_ui"),
+           hr(style = 'margin: 10px;'),
+           conditionalPanel(
+             condition = "output.language == 'en'",
+             tags$h3("Distribution of seats based on simulation results")),
+           conditionalPanel(
+             condition = "output.language != 'en'",
+             tags$h3("Distribuzione di seggi in base ai risultati della simulazione")),
+           tableOutput('coalition_table'),
+           conditionalPanel(
+             condition = "output.language == 'en'",
+             tags$h3("Chamber of Deputies")),
+           conditionalPanel(
+             condition = "output.language != 'en'",
+             tags$h3("Camera dei Deputati")),
+           plotOutput("camera_sim_bar", height = '100px'),
+           conditionalPanel(
+             condition = "output.language == 'en'",
+             tags$h3("Senate of the Republic")),
+           conditionalPanel(
+             condition = "output.language != 'en'",
+             tags$h3("Senato della Repubblica")),
+           plotOutput("senato_sim_bar", height = '100px'),
+           conditionalPanel(
+             condition = "output.language == 'en'",
+             tags$div(
+               tags$p(tags$a(href=paste0(app_url, "?lang=it"), tags$span(style = 'background-color:white; font-size:120%', "Italiano")), tags$br(), tags$a(href = simulation_info_url, target = '_blank', "Simulation details"), " - Designed by ", tags$a(href="http://www.francescobailo.net/", target='_blank', "Francesco Bailo"), " - Hosted by ", tags$a(href = 'https://nectar.org.au/research-cloud/', target='_blank', 'Nectar Cloud'), " - ", tags$a(href = 'https://github.com/fraba/ige18_app', target='_blank', 'Code on GitHub')),
+               id='footnote')),
+           conditionalPanel(
+             condition = "output.language != 'en'",
+             tags$div(
+               tags$p(tags$a(href=paste0(app_url, "?lang=en"), tags$span(style = 'background-color:white; font-size:120%', "English")), tags$br(), tags$a(href = simulation_info_url, target = '_blank', "Dettagli simulazione"), " - Creato da ", tags$a(href="http://www.francescobailo.net/", target='_blank', "Francesco Bailo"), " - Hosted by ", tags$a(href = 'https://nectar.org.au/research-cloud/', target='_blank', 'Nectar Cloud'), " - ", tags$a(href = 'https://github.com/fraba/ige18_app', target='_blank', 'Code on GitHub')),
+               id='footnote'))),
+    column(8,
+           leafletOutput("map", height = '700px')))
 )
 
 server <- function(input, output, session) {
@@ -238,7 +235,7 @@ server <- function(input, output, session) {
                       dashArray = "",
                       fillOpacity = 0.9,
                       bringToFront = TRUE)) %>%
-        setView(lng= 17, lat=42.15, zoom=6) 
+        setView(lng= 13, lat=41.8, zoom=6) 
     }
     
     
@@ -292,7 +289,7 @@ server <- function(input, output, session) {
   })
   
   output$senato_sim_bar <- renderPlot({
-  
+    
     # Senato sim plot
     sim_result_df$cod <- 
       factor(sim_result_df$cod, 
