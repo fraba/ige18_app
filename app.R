@@ -6,7 +6,7 @@ require(scales)
 require(viridis)
 library(xtable)
 
-app_url = 'http://something.com'
+app_url = 'http://130.56.250.79:3838/ige18_app/'
 simulation_info_url <- 'http://something.com'
 
 italy_box_y <- c(36, 47.5)
