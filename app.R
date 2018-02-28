@@ -33,7 +33,7 @@ ui <- fluidPage(
            conditionalPanel(
              condition = "output.language != 'en'",
              tags$h3("Distribuzione di seggi in base ai risultati della simulazione")),
-           tableOutput('coalition_table'),
+           dataTableOutput('coalition_table'),
            conditionalPanel(
              condition = "output.language == 'en'",
              tags$h3("Chamber of Deputies")),
@@ -326,7 +326,7 @@ server <- function(input, output, session) {
       coord_flip()
   })
   
-  output$coalition_table <- renderTable({
+  output$coalition_table <- renderDataTable({
     
     this_df <- sim_result_df[,c('cod','camera_seats','senato_seats')]
     this_df$camera_diff <- this_df$camera_seats - 630/2
@@ -345,7 +345,11 @@ server <- function(input, output, session) {
     if(length(query$lang)>0) {
       if (query$lang == 'en') {
         require(dplyr)
-        this_df$cod <- recode_factor(this_df$cod, 'CDX' = 'C-R', 'CSX' = 'C-L')
+        this_df$cod <- recode_factor(this_df$cod, 
+                                     'CDX' = '<a href="https://en.wikipedia.org/wiki/Centre-right_coalition">C-R</a>', 
+                                     'CSX' = '<a href="https://en.wikipedia.org/wiki/Centre-left_coalition">C-L</a>',
+                                     'M5S' = '<a href="https://en.wikipedia.org/wiki/Five_Star_Movement">M5S</a>',
+                                     'LeU' = '<a href="https://en.wikipedia.org/wiki/Free_and_Equal_(Italy)">LeU</a>')
         this_df <- this_df[,c(1,2,4,3,5)]
         colnames(this_df) <- c("", "Chamber seats", "maj.", "Senate seats", "maj.")
         return(this_df)
@@ -361,7 +365,7 @@ server <- function(input, output, session) {
     }
     
     
-  }, digits = 0, spacing = 'xs', align = 'c')
+  }, escape = FALSE, options = list(searching = FALSE, filter=FALSE, paging=FALSE, info=FALSE))
   
   output$map_variable_dens <- renderPlot({
     
