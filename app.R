@@ -7,7 +7,7 @@ require(viridis)
 library(xtable)
 
 app_url = 'http://130.56.250.79:3838/ige18_app/'
-simulation_info_url <- 'http://something.com'
+simulation_info_url <- 'http://www.francescobailo.net/2018/02/2018-italian-general-election-details-on-my-simulation/'
 
 italy_box_y <- c(36, 47.5)
 italy_box_x <- c(6.1, 19.5)  
@@ -277,6 +277,13 @@ server <- function(input, output, session) {
   
   output$camera_sim_bar <- renderPlot({
     # Camera sim plot
+    query <- parseQueryString(session$clientData$url_search)
+    if(length(query$lang)>0) {
+      if (query$lang == 'en') {
+        require(dplyr)
+        sim_result_df$cod <- recode_factor(sim_result_df$cod, 'CDX' = 'C-R', 'CSX' = 'C-L')
+      } 
+    }
     sim_result_df$cod <- 
       factor(sim_result_df$cod, 
              levels = sim_result_df$cod[order(sim_result_df$camera_seats)])
@@ -296,6 +303,13 @@ server <- function(input, output, session) {
   output$senato_sim_bar <- renderPlot({
     
     # Senato sim plot
+    query <- parseQueryString(session$clientData$url_search)
+    if(length(query$lang)>0) {
+      if (query$lang == 'en') {
+        require(dplyr)
+        sim_result_df$cod <- recode_factor(sim_result_df$cod, 'CDX' = 'C-R', 'CSX' = 'C-L')
+      } 
+    }
     sim_result_df$cod <- 
       factor(sim_result_df$cod, 
              levels = sim_result_df$cod[order(sim_result_df$senato_seats)])
